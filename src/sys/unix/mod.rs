@@ -11,7 +11,7 @@ macro_rules! syscall {
             Ok(res)
         }
     }};
-}
+} // 定义一个宏，直接调用libc中的函数
 
 cfg_os_poll! {
     mod selector;

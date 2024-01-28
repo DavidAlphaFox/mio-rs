@@ -77,7 +77,7 @@ impl Selector {
             kq,
         };
 
-        syscall!(fcntl(kq, libc::F_SETFD, libc::FD_CLOEXEC))?;
+        syscall!(fcntl(kq, libc::F_SETFD, libc::FD_CLOEXEC))?;//在exec执行前关掉文件描述符
         Ok(selector)
     }
 
