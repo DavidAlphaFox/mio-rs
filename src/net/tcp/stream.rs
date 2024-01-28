@@ -272,7 +272,7 @@ impl TcpStream {
 
 impl Read for TcpStream {
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
-        self.inner.do_io(|mut inner| inner.read(buf))
+        self.inner.do_io(|mut inner| inner.read(buf)) //使用内部读取读取 std::net::TcpStream.read
     }
 
     fn read_vectored(&mut self, bufs: &mut [IoSliceMut<'_>]) -> io::Result<usize> {
