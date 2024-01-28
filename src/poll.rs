@@ -264,7 +264,7 @@ pub struct Registry {
     /// Whether this selector currently has an associated waker.
     #[cfg(all(debug_assertions, not(target_os = "wasi")))]
     has_waker: Arc<AtomicBool>,
-}
+} 
 
 impl Poll {
     cfg_os_poll! {

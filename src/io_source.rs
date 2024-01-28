@@ -243,7 +243,7 @@ impl SelectorId {
     /// Associate an I/O source with `registry`, returning an error if its
     /// already registered.
     fn associate(&self, registry: &Registry) -> io::Result<()> {
-        let registry_id = registry.selector().id();
+        let registry_id = registry.selector().id(); //得到注册管理上selector的ID
         let previous_id = self.id.swap(registry_id, Ordering::AcqRel);
 
         if previous_id == Self::UNASSOCIATED {
@@ -253,8 +253,8 @@ impl SelectorId {
                 io::ErrorKind::AlreadyExists,
                 "I/O source already registered with a `Registry`",
             ))
-        }
-    }
+        } //确保每个IOSource只和一个注册管理器关联
+    } //
 
     /// Check the association of an I/O source with `registry`, returning an
     /// error if its registered with a different `Registry` or not registered at
