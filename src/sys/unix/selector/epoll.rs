@@ -81,7 +81,7 @@ impl Selector {
             u64: usize::from(token) as u64,
             #[cfg(target_os = "redox")]
             _pad: 0,
-        };
+        };//构建一个epoll支持的event，Token被当作了上下文来处理
 
         syscall!(epoll_ctl(self.ep, libc::EPOLL_CTL_MOD, fd, &mut event)).map(|_| ())
     }
