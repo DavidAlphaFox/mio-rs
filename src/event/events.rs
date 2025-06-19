@@ -222,7 +222,7 @@ impl<'a> Iterator for Iter<'a> {
         self.inner.inner.len()
     }
 }
-
+// 为了实现events的遍历，是实现的方法
 impl fmt::Debug for Events {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_list().entries(self).finish()
