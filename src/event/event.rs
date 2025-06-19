@@ -17,7 +17,22 @@ use std::fmt;
 pub struct Event {
     inner: sys::Event,
 }
-
+// 保持内存布局一致，里面的Event是对不同selector的Event封装
+// 在 Rust 中，#[repr(transparent)] 是一个用于控制类型内存布局的属性（attribute），
+// 它表示该类型与其内部某个非零大小字段在内存中具有完全相同的表示形式。以下是关键点解析：
+// 核心含义: 布局透明性
+// 标记了 #[repr(transparent)] 的类型必须满足：
+// 1. 有且仅有一个非零大小的字段（称为"透明字段"）。
+// 2. 可以有任意数量的零大小字段（如 PhantomData、标记类型等）。 
+// 3. 编译器会保证该类型的内存布局（大小、对齐方式、ABI）完全等同于透明字段。
+// 核心目的
+// 1. 创建类型安全的包装器（Newtype Pattern），同时确保： 
+//      a. 零运行时开销（无额外内存占用） 
+//      b. 与内部类型二进制兼容（可直接用于 FFI）
+// 限制
+// 1. 字段限制: 必须恰好有一个非零大小字段（允许多个 ZST 字段）。 
+// 2. 禁止类型: 不能用于空结构体 (struct Foo;) 或纯 ZST 类型。
+// 3.枚举限制: 仅适用于结构体（struct）和联合体（union），不适用于枚举。
 impl Event {
     /// Returns the event's token.
     pub fn token(&self) -> Token {
