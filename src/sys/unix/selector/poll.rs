@@ -654,7 +654,7 @@ cfg_io_source! {
         fd: RawFd,
         shared_record: Arc<RegistrationRecord>,
     }
-
+    //内部状态
     impl Drop for InternalState {
         fn drop(&mut self) {
             if self.shared_record.is_registered() {
@@ -666,7 +666,7 @@ cfg_io_source! {
     pub(crate) struct IoSourceState {
         inner: Option<Box<InternalState>>,
     }
-
+    // IoSourceState是根据不同的selector进行编译
     impl IoSourceState {
         pub fn new() -> IoSourceState {
             IoSourceState { inner: None }

@@ -73,7 +73,7 @@ impl Selector {
             #[cfg(target_os = "redox")]
             _pad: 0,
         };
-
+        //向Epool注册一个事件
         let ep = self.ep.as_raw_fd();
         syscall!(epoll_ctl(ep, libc::EPOLL_CTL_ADD, fd, &mut event)).map(|_| ())
     }

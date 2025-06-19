@@ -123,7 +123,7 @@ where
     ) -> io::Result<()> {
         (**self).register(registry, token, interests)
     }
-
+    //需要对Box<T>先解引用(*self)是Box<T>,(**self)是T
     fn reregister(
         &mut self,
         registry: &Registry,

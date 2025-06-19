@@ -48,7 +48,7 @@ use crate::{event, sys, Interest, Registry, Token};
 pub struct TcpListener {
     inner: IoSource<net::TcpListener>,
 }
-
+//都是IoSource的封装，和IoSource的inner是互相指向的
 impl TcpListener {
     /// Convenience method to bind a new TCP listener to the specified address
     /// to receive new connections.
